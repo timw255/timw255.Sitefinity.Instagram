@@ -1,0 +1,67 @@
+﻿@model timw255.Sitefinity.Instagram.Mvc.Models.InstagramModel
+
+@if (Model.Media.Count() > 0)
+{
+    <ul class="instagram">
+        @foreach (var item in Model.Media)
+        {
+            <li class="instagram-item">
+                <a href="@item.Link" data-instagram-likes="&#x2764; @item.LikeCount">
+                    <img src="@item.Thumbnail" />
+                </a>
+            </li>
+        }
+    </ul>
+}
+
+<style>
+.instagram {
+    padding: 0;
+    list-style: none;
+}
+.instagram-item {
+    display: inline-block;
+}
+.instagram-item a {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+}
+.instagram-item a img {
+    width: 100%;
+    vertical-align: top;
+}
+.instagram-item a:after,
+.instagram-item a:before {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.instagram-item a:after {
+    content: '\A';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+}
+.instagram-item a:before {
+    content: attr(data-instagram-likes);
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    line-height: 150px;
+    text-align: center;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.instagram-item a:hover:after,
+.instagram-item a:hover:before {
+    opacity:1;
+}
+</style>
